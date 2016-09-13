@@ -15,17 +15,17 @@ public class CreditCardValidator {
             types.append(CreditCardValidationType(dict: object))
         }
         return types
-        }()
+    }()
     
     public init() { }
     
     /**
-    Get card type from string
-    
-    - parameter string: card number string
-    
-    - returns: CreditCardValidationType structure
-    */
+     Get card type from string
+     
+     - parameter string: card number string
+     
+     - returns: CreditCardValidationType structure
+     */
     public func typeFromString(string: String) -> CreditCardValidationType? {
         for type in types {
             let predicate = NSPredicate(format: "SELF MATCHES %@", type.regex)
@@ -38,12 +38,12 @@ public class CreditCardValidator {
     }
     
     /**
-    Validate card number
-    
-    - parameter string: card number string
-    
-    - returns: true or false
-    */
+     Validate card number
+     
+     - parameter string: card number string
+     
+     - returns: true or false
+     */
     public func validateString(string: String) -> Bool {
         let numbers = self.onlyNumbersFromString(string)
         if numbers.characters.count < 9 {
@@ -75,13 +75,13 @@ public class CreditCardValidator {
     }
     
     /**
-    Validate card number string for type
-    
-    - parameter string: card number string
-    - parameter type:   CreditCardValidationType structure
-    
-    - returns: true or false
-    */
+     Validate card number string for type
+     
+     - parameter string: card number string
+     - parameter type:   CreditCardValidationType structure
+     
+     - returns: true or false
+     */
     public func validateString(string: String, forType type: CreditCardValidationType) -> Bool {
         return typeFromString(string) == type
     }
@@ -100,10 +100,10 @@ public class CreditCardValidator {
             "regex": "^3[47][0-9]{5,}$"
         ], [
             "name": "Visa",
-            "regex": "^4[0-9]{6,}$"
+            "regex": "^4[0-9]{6,}([0-9]{3})?$"
         ], [
             "name": "MasterCard",
-            "regex": "^5[1-5][0-9]{5,}$"
+            "regex": "^(5[1-5][0-9]{4}|677189)[0-9]{5,}$"
         ], [
             "name": "Maestro",
             "regex": "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$"
