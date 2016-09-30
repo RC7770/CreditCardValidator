@@ -7,6 +7,18 @@
 
 import Foundation
 
+extension String {
+    func range(from nsRange: NSRange) -> Range<String.Index>? {
+        guard
+            let from16 = utf16.index(utf16.startIndex, offsetBy: nsRange.location, limitedBy: utf16.endIndex),
+            let to16 = utf16.index(from16, offsetBy: nsRange.length, limitedBy: utf16.endIndex),
+            let from = String.Index(from16, within: self),
+            let to = String.Index(to16, within: self)
+            else { return nil }
+        return from ..< to
+    }
+}
+
 open class CreditCardValidator {
     
     open lazy var types: [CreditCardValidationType] = {
@@ -51,21 +63,23 @@ open class CreditCardValidator {
         }
         
         var reversedString = ""
-        let range = (numbers.characters.indices)
+        
+        let range :Range<String.Index> = numbers.startIndex ..< numbers.endIndex
         
         numbers.enumerateSubstrings(in: range, options: [NSString.EnumerationOptions.reverse, NSString.EnumerationOptions.byComposedCharacterSequences]) { (substring, substringRange, enclosingRange, stop) -> () in
             reversedString += substring!
         }
         
+
         var oddSum = 0, evenSum = 0
         let reversedArray = reversedString.characters
-        var i = 0
+        let i = 0
         
         for s in reversedArray {
             
             let digit = Int(String(s))!
             
-            if i++ % 2 == 0 {
+            if i+1 % 2 == 0 {
                 evenSum += digit
             } else {
                 oddSum += digit / 5 + (2 * digit) % 10
