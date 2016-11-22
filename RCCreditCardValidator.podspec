@@ -9,12 +9,12 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
 
   s.author             = { "Vitaliy" => "rahulchandnani3@gmail.com" }
-  s.social_media_url   = ""
+ 
 
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.9'
 
-  s.source       = { :git => "https://github.com/RC7770/CreditCardValidator", :tag => "v#{s.version}" }
+  s.source       = { :git => "https://github.com/RC7770/CreditCardValidator.git", :tag => "v#{s.version}" }
 
   s.source_files  = "CreditCardValidator/*.swift"
   
